@@ -1,7 +1,18 @@
 <?php
 
-$rawData = file_get_contents('php://input');
-$data = json_decode($rawData, true);
+require 'autoload.php';
 
-$ctrl = new \App\Controllers\Notes();
-$ctrl->actionCreate($data);
+if(file_get_contents('php://input')) {
+    $rawData = file_get_contents('php://input');
+    $data = json_decode($rawData, true);
+    
+    try {
+        $ctrl = new \App\Controllers\Notes();
+        $ctrl->actionCreate($data);
+    } catch (Exception $e) {
+        file_put_contents('log.txt', $e->getMessage(), true);
+    }
+} else {
+    $notes = \App\Models\Note::findAll();
+    echo json_encode($notes);
+}

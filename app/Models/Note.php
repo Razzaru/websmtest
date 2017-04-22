@@ -22,8 +22,11 @@ class Note
     public function saveNote($note)
     {
         $this->fill($note);
+        var_dump($this);
         if ($this->validate()) {
             $this->insert();
+        } else {
+            throw new \Exception('Ваша запись не прошла валидацию');
         }
     }
 
@@ -45,7 +48,7 @@ class Note
 
     protected function validateName()
     {
-        return preg_match('~.{5,50}~', $this->fullName);
+        return preg_match('~.{3,20}~', $this->fullName);
     }
 
     protected function validateEmail()
