@@ -1,0 +1,8 @@
+stdClass::__set_state(array(
+   'data' => 
+  stdClass::__set_state(array(
+     'fullName' => '123123',
+     'email' => '123@123.com',
+     'leadText' => '123123123123',
+  )),
+))

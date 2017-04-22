@@ -1,0 +1,95 @@
+<?php
+
+if(isset($_POST[0])) {
+    file_put_contents('log.txt', $_POST[0]);
+
+    die();
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="libs/normalize.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<header>
+    <div class="container">
+        <h1 class="header-text">Пожалуйста, оставьте отзыв! Ваше мнение очень важно для нас.</h1>
+    </div>
+</header>
+<main>
+    <div class="container">
+        <section class="form">
+            <form action="javascript:void(0);" class="main-form">
+                <table>
+                    <tr>
+                        <td><label for="fullName" class="label">Ваше ФИО</label></td>
+                        <td><input type="text" class="text-input" name="fullName" id="fullName"
+                                   placeholder="Введите ФИО..." value=""></td>
+                    </tr>
+                    <tr>
+                        <td><label for="email" class="label">Ваш email</label></td>
+                        <td><input type="email" class="text-input" name="email" id="email"
+                                   placeholder="Введите ваш email..." value=""></td>
+                    </tr>
+                    <tr>
+                        <td><label for="leadText" class="label">Ваше сообщение</label></td>
+                        <td><textarea name="leadText" id="leadText" rows="5" placeholder="Введите текст сообщения..."
+                                      class="big-text-input"></textarea></td>
+                    </tr>
+                </table>
+                <button class="main-btn" onclick="log()">Добавить запись</button>
+            </form>
+        </section>
+        <section class="leads">
+            <div class="panel">
+                <div class="panel-header">
+                    <span class="plain-text">Вася Пупкин</span>
+                    <span class="plain-text pull-right">test@test.com</span>
+                </div>
+                <div class="panel-body">
+                    <p class="lead-text">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita, quas saepe. Aliquid
+                        asperiores consequuntur culpa dicta distinctio dolorum earum, incidunt ipsa iure maxime mollitia
+                        nobis non quibusdam quidem reiciendis sequi.
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A blanditiis deserunt eius enim error,
+                        excepturi expedita fugiat, maxime placeat quo, repellendus soluta vero voluptate. Dolorem est et
+                        explicabo repellendus ut!
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+<script>
+    function log() {
+        let fullName = document.querySelector('#fullName').value;
+        let email = document.querySelector('#email').value;
+        let leadText = document.querySelector('#leadText').value;
+
+        if (fullName && email && leadText) {
+            var dataArr = {
+                data: {
+                    fullName: fullName,
+                    email: email,
+                    leadText: leadText
+                }
+            };
+            fetch('ajax.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dataArr)
+            });
+        } else {
+            alert('Введите данные');
+        }
+    }
+</script>
+</body>
+</html>
