@@ -9,16 +9,6 @@ abstract class Model
 
     public $id;
 
-    public static function findAll()
-    {
-        $db = Db::instance();
-        return $db->query(
-            'SELECT * FROM ' . static::TABLE,
-            [],
-            static::class
-        );
-    }
-
     public function isNew()
     {
         return empty($this->id);
