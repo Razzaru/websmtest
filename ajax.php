@@ -1,4 +1,7 @@
 <?php
 
 $rawData = file_get_contents('php://input');
-file_put_contents('log.txt', var_export(json_decode($rawData), true));
+$data = json_decode($rawData, true);
+
+$ctrl = new \App\Controllers\Notes();
+$ctrl->actionCreate($data);
