@@ -16,7 +16,7 @@
 <main>
     <div class="container">
         <section class="form">
-            <form action="javascript:void(0);" class="main-form">
+            <form action="/ajax.php" method="post" class="main-form">
                 <table>
                     <tr>
                         <td><label for="fullName" class="label">Ваше ФИО</label></td>
@@ -34,10 +34,25 @@
                                       class="big-text-input"></textarea></td>
                     </tr>
                 </table>
-                <button class="main-btn" type="reset" onclick="addNote()">Добавить запись</button>
+                <button class="main-btn" type="submit" id="submit-btn">Добавить запись</button>
             </form>
         </section>
         <section class="leads">
+            <?php
+            foreach ($this->notes as $note):
+                ?>
+            <div class="panel">
+                <div class="panel-header">
+                    <span class="plain-text"><?php echo $note->fullName ?></span>
+                    <span class="plain-text pull-right"><?php echo $note->email ?></span>
+                </div>
+                <div class="panel-body">
+                    <p class="lead-text"><?php echo $note->leadText ?></p>
+                </div>
+            </div>
+            <?
+            endforeach;
+            ?>
         </section>
     </div>
 </main>

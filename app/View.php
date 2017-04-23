@@ -4,6 +4,7 @@ namespace App;
 
 class View
 {
+    public $notes;
     
     public function render($template)
     {

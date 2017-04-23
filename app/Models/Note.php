@@ -22,7 +22,6 @@ class Note
     public function saveNote($note)
     {
         $this->fill($note);
-        var_dump($this);
         if ($this->validate()) {
             $this->insert();
         } else {

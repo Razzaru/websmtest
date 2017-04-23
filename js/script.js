@@ -1,25 +1,7 @@
-
-refresh();
-
-function refresh() {
-    let leads = document.querySelector('.leads');
-    leads.innerHTML = '';
-    var data = getAll();
-    append(data);
-}
-
-function getAll() {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'ajax.php', false);
-    xhr.send();
-    if (xhr.status != 200) {
-        console.log(xhr.status + ': ' + xhr.statusText);
-    } else {
-        return JSON.parse(xhr.response);
-    }
-}
-
-function addNote() {
+document.querySelector('#submit-btn').addEventListener('click', function (evt) {
+    
+    evt.preventDefault();
+    
     let fullName = document.querySelector('#fullName').value;
     let email = document.querySelector('#email').value;
     let leadText = document.querySelector('#leadText').value;
@@ -56,15 +38,7 @@ function addNote() {
     } else {
         alert('Введите данные');
     }
-}
-
-function append(data) {
-    let leads = document.querySelector('.leads');
-    data.forEach(function (item) {
-        this.panel = constructPanel(item);
-        leads.appendChild(this.panel);
-    })
-}
+});
 
 function constructPanel(item) {
     var panel = document.createElement('div');
