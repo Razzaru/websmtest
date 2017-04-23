@@ -12,11 +12,18 @@ abstract class Model
     public static function findAll()
     {
         $db = Db::instance();
-        return $db->query(
+        $data =  $db->query(
             'SELECT * FROM ' . static::TABLE,
             [],
             static::class
         );
+
+        foreach ($data as $obj) {
+            foreach ($obj as &$value) {
+                $value = strip_tags($value);
+            }
+        }
+        return $data;
     }
 
     public function isNew()

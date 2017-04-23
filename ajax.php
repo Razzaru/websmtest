@@ -15,5 +15,5 @@ if(file_get_contents('php://input')) {
     }
 } else {
     $notes = \App\Models\Note::findAll();
-    echo strip_tags(json_encode($notes));
+    echo json_encode($notes);
 }
