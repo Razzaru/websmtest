@@ -4,6 +4,7 @@ require 'autoload.php';
 
 if(file_get_contents('php://input')) {
     $rawData = file_get_contents('php://input');
+    $rawData = strip_tags($rawData);
     $data = json_decode($rawData, true);
     
     try {
@@ -14,5 +15,5 @@ if(file_get_contents('php://input')) {
     }
 } else {
     $notes = \App\Models\Note::findAll();
-    echo json_encode($notes);
+    echo strip_tags(json_encode($notes));
 }

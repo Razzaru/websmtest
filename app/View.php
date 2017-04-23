@@ -8,9 +8,6 @@ class View
     public function render($template)
     {
         ob_start();
-        foreach ($this->data as $prop => $value) {
-            $$prop = $value;
-        }
         include $template;
         $content = ob_get_contents();
         ob_end_clean();
